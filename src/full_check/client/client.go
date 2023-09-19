@@ -119,7 +119,7 @@ func (p *RedisClient) Connect() error {
 
 	if len(p.redisHost.Password) != 0 {
 		var args []interface{}
-		for _, arg := range strings.Split(p.redisHost.Password, ":") {
+		for _, arg := range strings.SplitN(p.redisHost.Password, ":", 2) {
 			args = append(args, arg)
 		}
 		if _, err := p.conn.Do(p.redisHost.Authtype, args...); err != nil {
